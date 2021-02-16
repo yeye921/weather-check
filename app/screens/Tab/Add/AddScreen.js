@@ -68,7 +68,7 @@ class AddScreen extends Component {
     this.setState({ keywords });
   }
   render() {
-    const { keywordValue } = this.state;
+    const { keywordValue,keywords } = this.state;
     return (
       <DismissKeyboard>
         <View style={styles.container}>
