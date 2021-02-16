@@ -6,8 +6,8 @@ const Button = ({ submitKeyword }) => (
     <TouchableHighlight
       underlayColor={"transparent"}
       style={styles.button}
-      //onPress={(() => Alert.alert("키워드 추가 완료"), submitKeyword)}
-      onPress={submitKeyword}
+      onPress={(() => Alert.alert("키워드 추가 완료"), submitKeyword)}
+      //onPress={submitKeyword}
     >
       <View style={styles.button}>
         <Text style={styles.button_title}>완료</Text>

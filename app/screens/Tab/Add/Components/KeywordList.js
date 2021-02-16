@@ -1,5 +1,5 @@
 import React from "react";
-import { View } from "react-native";
+import { View, StyleSheet } from "react-native";
 import Keyword from "./Keyword";
 
 const KeywordList = ({ keywords, deleteKeyword }) => {
@@ -12,6 +12,12 @@ const KeywordList = ({ keywords, deleteKeyword }) => {
       />
     );
   });
-  return <View>{keywords}</View>;
+  return <View style={styles.keyword}>{keywords}</View>;
 };
 export default KeywordList;
+
+const styles = StyleSheet.create({
+  keyword: {
+    marginTop: 15,
+  },
+});

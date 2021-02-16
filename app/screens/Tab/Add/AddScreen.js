@@ -13,10 +13,10 @@ import {
 import KeywordInput from "./Components/KeywordInput";
 import Button from "./Components/Button";
 import KeywordList from "./Components/KeywordList";
-import Keyword from "./Components/Keyword";
-import KeywordButton from "./Components/KeywordButton";
+import URLInput from "./Components/URLInput";
 
 let keywordIndex = 0;
+let urlIndex = 0;
 
 const DismissKeyboard = ({ children }) => (
   <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -45,8 +45,8 @@ class AddScreen extends Component {
   }
   submitKeyword() {
     if (
-      this.state.keywordValue.match(/^\s*$/)
-      //||this.state.urlValue.match(/^\s*$/)
+      this.state.keywordValue.match(/^\s*$/) ||
+      this.state.urlValue.match(/^\s*$/)
     ) {
       return;
     }
@@ -56,9 +56,17 @@ class AddScreen extends Component {
       keywordIndex,
       complete: false,
     };
+    const url = {
+      title: this.state.urlValue,
+      urlIndex,
+      complete: false,
+    };
     keywordIndex++;
+    urlIndex++;
     const keywords = [...this.state.keywords, keyword];
-    this.setState({ keywords, keywordValue: "" });
+    const urls = [...this.state.urls, url];
+    this.setState({ keywords });
+    this.setState({ urls, urlValue: "" });
   }
   deleteKeyword(keywordIndex) {
     let { keywords } = this.state;
@@ -68,7 +76,7 @@ class AddScreen extends Component {
     this.setState({ keywords });
   }
   render() {
-    const { keywordValue,keywords } = this.state;
+    const { keywordValue, keywords, urlValue, urls } = this.state;
     return (
       <DismissKeyboard>
         <View style={styles.container}>
@@ -82,16 +90,18 @@ class AddScreen extends Component {
               keywordChange={(text) => this.keywordChange(text)}
             />
 
-            {/* <URLInput
+            <URLInput
               urlValue={urlValue}
               urlChange={(text) => this.urlChange(text)}
-            /> */}
-            <KeywordList
-              deleteKeyword={this.deleteKeyword}
-              keywords={keywords}
             />
+
             <Button submitKeyword={this.submitKeyword} />
-            <ScrollView keyboardShouldPersistTaps="always"></ScrollView>
+            <ScrollView keyboardShouldPersistTaps="always">
+              <KeywordList
+                deleteKeyword={this.deleteKeyword}
+                keywords={keywords}
+              />
+            </ScrollView>
           </View>
         </View>
       </DismissKeyboard>
